@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - VikriDrishti Sales Analytics</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@font-face{font-family:'Graphik';src:url('fonts/Graphik/Graphik Family/Graphik-Regular-Trial.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Graphik';src:url('fonts/Graphik/Graphik Family/Graphik-Medium-Trial.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Graphik';src:url('fonts/Graphik/Graphik Family/Graphik-Semibold-Trial.otf') format('opentype');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Graphik';src:url('fonts/Graphik/Graphik Family/Graphik-Semibold-Trial.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f5f3ef;--bg2:#fff;--border:#d6d0c8;--text:#1a1a1a;--text2:#555;--text3:#888;--r:8px;--c1:#2d6a4f;--cO:#1a1a1a;}
+body{font-family:'Graphik',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;display:flex;align-items:center;justify-content:center;min-height:100vh;font-size:15px}
+.auth-container{background:var(--bg2);padding:40px;border:1px solid var(--border);border-radius:var(--r);width:100%;max-width:400px;box-shadow:0 4px 20px rgba(0,0,0,0.05)}
+.logo{text-align:center;margin-bottom:30px}
+.logo h1{font-size:1.85rem;font-weight:800;letter-spacing:.5px}
+.logo h1 span{color:var(--c1)}
+.logo .tag{font-size:.82rem;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-top:5px;font-weight:500}
+.fg{margin-bottom:15px}
+.fg label{display:block;font-size:.78rem;color:var(--text2);margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.fg input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:11px 14px;border-radius:var(--r);font-size:.95rem;font-family:inherit;outline:none;transition:border .3s cubic-bezier(.4,0,.2,1);font-weight:500}
+.fg input:focus{border-color:var(--c1)}
+.btn{width:100%;padding:13px;background:var(--cO);color:#fff;border:none;border-radius:var(--r);font-family:inherit;font-weight:700;cursor:pointer;font-size:.95rem;transition:opacity .35s cubic-bezier(.4,0,.2,1);text-transform:uppercase;letter-spacing:1px;margin-top:10px}
+.btn:hover{opacity:0.9}
+.toggle-form{text-align:center;margin-top:20px;font-size:.88rem;color:var(--text2);font-weight:500}
+.toggle-form a{color:var(--c1);text-decoration:none;font-weight:700;cursor:pointer}
+.toggle-form a:hover{text-decoration:underline}
+.msg{font-size:.88rem;margin-bottom:15px;padding:10px;border-radius:var(--r);display:none;text-align:center;font-weight:600}
+.msg.error{background:#fdeaea;color:#e07a5f;border:1px solid #fbd0d0}
+.msg.success{background:#eafaf1;color:var(--c1);border:1px solid #c3e6cb}
+/* Password toggle */
+.pwd-wrap{position:relative}
+.pwd-toggle{position:absolute;right:14px;top:32px;cursor:pointer;color:var(--text3);transition:color .3s}
+.pwd-toggle:hover{color:var(--text)}
+.fg input.pwd-input{padding-right:40px}
+/* Demo credentials note */
+.demo-note{font-size:0.82rem;color:var(--text3);text-align:center;margin-top:20px;padding-top:15px;border-top:1px dashed var(--border);font-weight:500}
+</style>
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="logo"><h1>Vikri<span>Drishti</span></h1><div class="tag">Create Account</div></div>
+  
+  <div id="msgBox" class="msg"></div>
+
+  <!-- Login Form -->
+  <form id="loginForm" style="display:none">
+    <div class="fg">
+      <label>Email</label>
+      <input type="email" id="lEmail" required placeholder="name@company.com" value="admin@vikridrishti.com">
+    </div>
+    <div class="fg pwd-wrap">
+      <label>Password</label>
+      <input type="password" id="lPass" required placeholder="••••••••" value="admin123" class="pwd-input">
+      <i class="fas fa-eye pwd-toggle" onclick="togglePwd('lPass', this)"></i>
+    </div>
+    <button type="submit" class="btn">Sign In</button>
+    <div class="toggle-form">Don't have an account? <a onclick="toggleForm('register')">Register</a></div>
+    
+    <div class="demo-note">
+      Demo account: admin@vikridrishti.com / admin123
+    </div>
+  </form>
+
+  <!-- Register Form -->
+  <form id="regForm">
+    <div class="fg">
+      <label>Full Name</label>
+      <input type="text" id="rName" required placeholder="John Doe">
+    </div>
+    <div class="fg">
+      <label>Email</label>
+      <input type="email" id="rEmail" required placeholder="name@company.com">
+    </div>
+    <div class="fg pwd-wrap">
+      <label>Password</label>
+      <input type="password" id="rPass" required placeholder="••••••••" class="pwd-input">
+      <i class="fas fa-eye pwd-toggle" onclick="togglePwd('rPass', this)"></i>
+    </div>
+    <div class="fg">
+      <label>Company (Optional)</label>
+      <input type="text" id="rComp" placeholder="Acme Inc.">
+    </div>
+    <button type="submit" class="btn">Create Account</button>
+    <div class="toggle-form">Already have an account? <a onclick="toggleForm('login')">Sign In</a></div>
+  </form>
+
+</div>
+
+<script src="auth.js"></script>
+<script>
+  // Redirect if already logged in
+  if(getCurrentUser()){
+    window.location.href='index.html';
+  }
+
+  const loginForm = document.getElementById('loginForm');
+  const regForm = document.getElementById('regForm');
+  const msgBox = document.getElementById('msgBox');
+
+  function showMsg(text, type='error'){
+    msgBox.textContent = text;
+    msgBox.className = 'msg ' + type;
+    msgBox.style.display = 'block';
+  }
+
+  function toggleForm(type){
+    msgBox.style.display = 'none';
+    if(type==='register'){
+      loginForm.style.display='none';
+      regForm.style.display='block';
+      document.querySelector('.logo .tag').textContent = 'Create Account';
+    } else {
+      regForm.style.display='none';
+      loginForm.style.display='block';
+      document.querySelector('.logo .tag').textContent = 'Secure Login';
+    }
+  }
+
+  loginForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const email = document.getElementById('lEmail').value;
+    const pass = document.getElementById('lPass').value;
+    const res = loginUser(email, pass);
+    if(res.ok){
+      window.location.href='index.html';
+    } else {
+      showMsg(res.msg);
+    }
+  });
+
+  regForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const name = document.getElementById('rName').value;
+    const email = document.getElementById('rEmail').value;
+    const pass = document.getElementById('rPass').value;
+    const comp = document.getElementById('rComp').value;
+    
+    if(pass.length < 6){ showMsg('Password must be at least 6 characters'); return; }
+    
+    const res = registerUser(name, email, pass, comp);
+    if(res.ok){
+      showMsg('Account created successfully. Please sign in.', 'success');
+      toggleForm('login');
+      document.getElementById('lEmail').value = email;
+      document.getElementById('lPass').value = '';
+    } else {
+      showMsg(res.msg);
+    }
+  });
+
+  function togglePwd(id, icon) {
+    const inp = document.getElementById(id);
+    if(inp.type === 'password') {
+      inp.type = 'text';
+      icon.className = 'fas fa-eye-slash pwd-toggle';
+    } else {
+      inp.type = 'password';
+      icon.className = 'fas fa-eye pwd-toggle';
+    }
+  }
+</script>
+</body>
+</html>

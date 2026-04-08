@@ -1,0 +1,17 @@
+# Test/Temporary Scripts
+pp*.js
+test_parse.js
+debug_*.js
+*.png
+*.webp
+
+# Node modules (if any)
+node_modules/
+
+# Local trial fonts
+*Trial*
+*trial*
+
+# Misc
+.DS_Store
+Thumbs.db

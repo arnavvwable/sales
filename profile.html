@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - VikriDrishti Sales Analytics</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @font-face{font-family:'Graphik';src:url('fonts/Graphik/Graphik Family/Graphik-Regular-Trial.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+    @font-face{font-family:'Graphik';src:url('fonts/Graphik/Graphik Family/Graphik-Medium-Trial.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+    @font-face{font-family:'Graphik';src:url('fonts/Graphik/Graphik Family/Graphik-Semibold-Trial.otf') format('opentype');font-weight:600;font-style:normal;font-display:swap}
+    @font-face{font-family:'Graphik';src:url('fonts/Graphik/Graphik Family/Graphik-Semibold-Trial.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --bg: #f5f3ef;
+      --bg2: #fff;
+      --border: #d6d0c8;
+      --text: #1a1a1a;
+      --text2: #555;
+      --text3: #888;
+      --r: 8px;
+      --c1: #2d6a4f;
+      --cO: #1a1a1a;
+    }
+
+    body {
+      font-family: 'Graphik', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px
+    }
+
+    .dash {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--text);
+      margin-bottom: 30px
+    }
+
+    .header h1 {
+      font-size: 1.65rem;
+      font-weight: 800;
+    }
+
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity .3s
+    }
+
+    .nav-link:hover {
+      opacity: 0.7
+    }
+
+    .profile-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02)
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px dashed var(--border)
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--c1);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px
+    }
+
+    .profile-info h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .profile-info p {
+      color: var(--text2);
+      font-size: .95rem;
+      font-weight: 500
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      background: #eafaf1;
+      color: var(--c1);
+      border-radius: 12px;
+      font-size: .78rem;
+      font-weight: 700;
+      margin-top: 5px;
+      border: 1px solid #c3e6cb
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px
+    }
+
+    @media(max-width:600px) {
+      .form-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .fg {
+      margin-bottom: 20px
+    }
+
+    .fg label {
+      display: block;
+      font-size: .78rem;
+      color: var(--text2);
+      margin-bottom: 5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px
+    }
+
+    .fg input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 11px 14px;
+      border-radius: var(--r);
+      font-size: .95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border .3s;
+      font-weight: 500
+    }
+
+    .fg input:focus {
+      border-color: var(--c1)
+    }
+
+    .fg input:disabled {
+      opacity: 0.6;
+      cursor: not-allowed
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 30px 0 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border)
+    }
+
+    .btn {
+      padding: 11px 22px;
+      background: var(--cO);
+      color: #fff;
+      border: none;
+      border-radius: var(--r);
+      font-family: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: .95rem;
+      transition: opacity .35s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .btn:hover {
+      opacity: 0.9
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border)
+    }
+
+    .btn-outline:hover {
+      background: var(--bg);
+      opacity: 1
+    }
+
+    .btn-danger {
+      background: transparent;
+      color: #e07a5f;
+      border: 1px solid #fbd0d0
+    }
+
+    .btn-danger:hover {
+      background: #fdeaea
+    }
+
+    .msg {
+      font-size: .88rem;
+      margin-bottom: 20px;
+      padding: 10px;
+      border-radius: var(--r);
+      display: none;
+      font-weight: 600
+    }
+
+    .msg.success {
+      background: #eafaf1;
+      color: var(--c1);
+      border: 1px solid #c3e6cb
+    }
+
+    .msg.error {
+      background: #fdeaea;
+      color: #e07a5f;
+      border: 1px solid #fbd0d0
+    }
+
+    /* Password toggle */
+    .pwd-wrap {
+      position: relative
+    }
+
+    .pwd-toggle {
+      position: absolute;
+      right: 14px;
+      top: 32px;
+      cursor: pointer;
+      color: var(--text3);
+      transition: color .3s
+    }
+
+    .pwd-toggle:hover {
+      color: var(--text)
+    }
+
+    .fg input.pwd-input {
+      padding-right: 40px
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="dash">
+    <div class="header">
+      <a href="index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+      <h1>Profile Settings</h1>
+    </div>
+
+    <div id="msgBox" class="msg"></div>
+
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="avatar" id="avTxt">--</div>
+        <div class="profile-info">
+          <h2 id="dispName">Loading...</h2>
+          <p id="dispEmail">loading@email.com</p>
+          <span class="badge" id="dispRole">User</span>
+        </div>
+      </div>
+
+      <form id="profileForm">
+        <div class="section-title">Personal Information</div>
+        <div class="form-grid">
+          <div class="fg">
+            <label>Full Name</label>
+            <input type="text" id="pName" required>
+          </div>
+          <div class="fg">
+            <label>Email Address</label>
+            <input type="email" id="pEmail" disabled>
+          </div>
+          <div class="fg">
+            <label>Company / Organization</label>
+            <input type="text" id="pComp">
+          </div>
+          <div class="fg">
+            <label>Phone Number</label>
+            <input type="text" id="pPhone">
+          </div>
+        </div>
+
+        <div class="section-title">Change Password</div>
+        <div class="form-grid">
+          <div class="fg pwd-wrap">
+            <label>Current Password</label>
+            <input type="password" id="pCurPass" placeholder="Leave blank to keep same" class="pwd-input">
+            <i class="fas fa-eye pwd-toggle" onclick="togglePwd('pCurPass', this)"></i>
+          </div>
+          <div class="fg pwd-wrap">
+            <label>New Password</label>
+            <input type="password" id="pNewPass" placeholder="Leave blank to keep same" class="pwd-input">
+            <i class="fas fa-eye pwd-toggle" onclick="togglePwd('pNewPass', this)"></i>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn btn-danger" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i>
+            Logout</button>
+          <button type="submit" class="btn"><i class="fas fa-save"></i> Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    if (!requireAuth()) throw new Error("Auth required");
+
+    const user = getCurrentUser();
+    const msgBox = document.getElementById('msgBox');
+
+    // Populate data
+    document.getElementById('dispName').textContent = user.name;
+    document.getElementById('dispEmail').textContent = user.email;
+    document.getElementById('dispRole').textContent = user.role || 'Analyst';
+    document.getElementById('avTxt').textContent = getInitials(user.name);
+
+    document.getElementById('pName').value = user.name;
+    document.getElementById('pEmail').value = user.email;
+    document.getElementById('pComp').value = user.company || '';
+    document.getElementById('pPhone').value = user.phone || '';
+
+    function showMsg(text, type = 'success') {
+      msgBox.textContent = text;
+      msgBox.className = 'msg ' + type;
+      msgBox.style.display = 'block';
+      setTimeout(() => msgBox.style.display = 'none', 4000);
+    }
+
+    function doLogout() {
+      logoutUser();
+    }
+
+    document.getElementById('profileForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const updates = {
+        name: document.getElementById('pName').value,
+        company: document.getElementById('pComp').value,
+        phone: document.getElementById('pPhone').value,
+      };
+
+      const curP = document.getElementById('pCurPass').value;
+      const newP = document.getElementById('pNewPass').value;
+
+      if (curP || newP) {
+        if (!curP || !newP) { showMsg('Provide both current and new password to change it', 'error'); return; }
+        updates.currentPassword = curP;
+        updates.newPassword = newP;
+      }
+
+      const res = updateProfile(updates);
+      if (res.ok) {
+        showMsg('Profile updated successfully');
+        // Update UI elements
+        document.getElementById('dispName').textContent = res.user.name;
+        document.getElementById('avTxt').textContent = getInitials(res.user.name);
+        document.getElementById('pCurPass').value = '';
+        document.getElementById('pNewPass').value = '';
+      } else {
+        showMsg(res.msg, 'error');
+      }
+    });
+
+    function togglePwd(id, icon) {
+      const inp = document.getElementById(id);
+      if (inp.type === 'password') {
+        inp.type = 'text';
+        icon.className = 'fas fa-eye-slash pwd-toggle';
+      } else {
+        inp.type = 'password';
+        icon.className = 'fas fa-eye pwd-toggle';
+      }
+    }
+
+  </script>
+</body>
+
+</html>
